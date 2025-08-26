@@ -2,7 +2,7 @@ import pandas as pd
 from datetime import datetime
 import streamlit as st
 from app_monitor import monitor
-
+from babel.dates import format_datetime
 
 #with open('style.css', encoding='utf8') as r:
     #st.markdown(f"<style>{r.read()}</style>", unsafe_allow_html=True)
@@ -68,7 +68,7 @@ if option == 'Ficha de Atendimento':
         # Criando dataframe apenas com dias únicos
         dias_df = df.drop_duplicates('Data')[['Data', 'Horas de Funcionamento no Dia', 'Motivo']].copy()
         dias_df['Horas (decimais)'] = dias_df['Horas de Funcionamento no Dia'].dt.total_seconds() / 3600
-        dias_df['Dia da Semana'] = dias_df['Data'].dt.day_name(locale='pt_BR')  # para nomes em português
+        dias_df['Dia da Semana'] = dias_df['Data'].apply(lambda x: format_datetime(x, "EEEE", locale='pt_BR'))  # para nomes em português
 
 
 
@@ -345,3 +345,4 @@ if option == 'Monitores':
     # total_horas_base = df['Duracao_horas'].sum()
 
     # st.metric("⏱️ Horas Totais na Base de Dados", f"{total_horas_base:.2f} h")
+
