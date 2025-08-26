@@ -4,8 +4,8 @@ import streamlit as st
 from app_monitor import monitor
 
 
-with open('style.css', encoding='utf8') as r:
-    st.markdown(f"<style>{r.read()}</style>", unsafe_allow_html=True)
+#with open('style.css', encoding='utf8') as r:
+    #st.markdown(f"<style>{r.read()}</style>", unsafe_allow_html=True)
 
 # CD MONITORES -> ENTRAR NA PASTA
 
@@ -343,4 +343,5 @@ if option == 'Monitores':
 
     # # --- Parte 3: métrica geral da base de dados (soma direta do df) ---
     # total_horas_base = df['Duracao_horas'].sum()
+
     # st.metric("⏱️ Horas Totais na Base de Dados", f"{total_horas_base:.2f} h")
