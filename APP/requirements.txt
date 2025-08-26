@@ -3,4 +3,6 @@ numpy
 streamlit
 matplotlib
 plotly
+babel
+
 
