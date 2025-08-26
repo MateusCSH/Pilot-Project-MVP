@@ -156,8 +156,9 @@ if option == 'Ficha de Atendimento':
 
         # MOSTRANDO POR MÊS
         import locale
-        locale.setlocale(locale.LC_TIME, 'Portuguese_Brazil.1252')
-        dias_df['Mes_Ano'] = dias_df['Data'].dt.strftime('%Y-%B').str.capitalize()
+        from babel.dates import format_date
+        dias_df['Mes_Ano'] = dias_df['Data'].apply(lambda x: format_date(x, "yyyy-MMMM", locale='pt_BR').capitalize())
+
 
         metrics_mes = dias_df.groupby('Mes_Ano').agg(
             Horas_Totais=('Horas (decimais)', 'sum'),
@@ -345,4 +346,5 @@ if option == 'Monitores':
     # total_horas_base = df['Duracao_horas'].sum()
 
     # st.metric("⏱️ Horas Totais na Base de Dados", f"{total_horas_base:.2f} h")
+
 
