@@ -52,7 +52,7 @@ if option == 'Ficha de Atendimento':
 
         for data, grupo in df.groupby('Data'):
             intervalos = []
-    
+        
             for _, linha in grupo.iterrows():
                 entrada_hora = linha['Horário de entrada']
                 saida_hora = linha['Horário de Saída']
@@ -62,9 +62,14 @@ if option == 'Ficha de Atendimento':
                     saida = datetime.combine(data, saida_hora)
                     intervalos.append((entrada, saida))
         
-            unificados = unir_intervalos(intervalos)
-            total = sum([(fim - ini) for ini, fim in unificados], timedelta())
+            if len(intervalos) > 0:
+                unificados = unir_intervalos(intervalos)
+                total = sum([(fim - ini) for ini, fim in unificados], timedelta())
+            else:
+                total = timedelta(0)
+        
             horas_por_dia[data] = total
+
 
 
         # Criar a nova coluna com horas de funcionamento por dia
