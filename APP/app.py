@@ -30,7 +30,8 @@ if option == 'Ficha de Atendimento':
 
         # Conversões
         df['Data'] = pd.to_datetime(df['Data'], dayfirst=True)
-        df['Horário de entrada'] = pd.to_datetime(df['Horário de entrada'], format='%H:%M:%S').dt.time
+        df['Horário de entrada'] = pd.to_datetime(df['Horário de entrada'], errors='coerce').dt.time
+
         df['Horário de Saída'] = pd.to_datetime(df['Horário de Saída'], format='%H:%M:%S', errors='coerce').dt.time
 
 
