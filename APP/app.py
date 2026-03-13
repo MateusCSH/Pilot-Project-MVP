@@ -32,8 +32,7 @@ if option == 'Ficha de Atendimento':
         df['Data'] = pd.to_datetime(df['Data'], dayfirst=True)
         df['Horário de entrada'] = pd.to_datetime(df['Horário de entrada'], errors='coerce').dt.time
 
-        df['Horário de Saída'] = pd.to_datetime(df['Horário de Saída'], format='%H:%M:%S', errors='coerce').dt.time
-
+        df['Horário de Saída'] = pd.to_datetime(df['Horário de Saída'], errors='coerce').dt.time
 
         # Função para unir intervalos sobrepostos
         def unir_intervalos(intervalos):
