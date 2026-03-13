@@ -51,15 +51,21 @@ if option == 'Ficha de Atendimento':
         horas_por_dia = {}
 
         for data, grupo in df.groupby('Data'):
-            intervalos = []
-            for _, linha in grupo.iterrows():
-                entrada = datetime.combine(data, linha['Horário de entrada'])
-                saida = datetime.combine(data, linha['Horário de Saída'])
+    intervalos = []
+    
+        for _, linha in grupo.iterrows():
+            entrada_hora = linha['Horário de entrada']
+            saida_hora = linha['Horário de Saída']
+    
+            if pd.notna(entrada_hora) and pd.notna(saida_hora):
+                entrada = datetime.combine(data, entrada_hora)
+                saida = datetime.combine(data, saida_hora)
                 intervalos.append((entrada, saida))
-            
-            unificados = unir_intervalos(intervalos)
-            total = sum([(fim - ini) for ini, fim in unificados], timedelta())
-            horas_por_dia[data] = total
+    
+        unificados = unir_intervalos(intervalos)
+        total = sum([(fim - ini) for ini, fim in unificados], timedelta())
+        horas_por_dia[data] = total
+
 
         # Criar a nova coluna com horas de funcionamento por dia
         df['Horas de Funcionamento no Dia'] = df['Data'].map(horas_por_dia)
