@@ -4,5 +4,6 @@ streamlit
 matplotlib
 plotly
 babel
+altair==4.2.2
 
 
